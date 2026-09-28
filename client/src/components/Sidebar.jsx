@@ -2,9 +2,12 @@
 import {
     LayoutDashboard,
     Users,
-    Menu,
-    X
+    X,
+    UserCircle
 } from "lucide-react";
+
+// Import NavLink for route navigation and active state
+import { NavLink } from "react-router-dom";
 
 const Sidebar = ({ isOpen, setIsOpen }) => {
     return (
@@ -20,7 +23,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
             {/* Sidebar */}
             <aside
                 className={`
-                    fixed left-0 top-0 z-50 h-screen w-64
+                    fixed left-0 top-0 z-50 flex h-screen w-64 flex-col
                     border-r border-gray-200 bg-white
                     transition-transform duration-300
                     lg:translate-x-0
@@ -43,29 +46,71 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
                 </div>
 
                 {/* Navigation */}
-                <nav className="p-4">
+                <nav className="flex-1 p-4">
                     <p className="mb-3 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
                         Menu
                     </p>
 
                     <div className="space-y-1">
-                        <a
-                            href="/dashboard"
-                            className="flex items-center gap-3 rounded-lg bg-gray-100 px-3 py-2.5 text-sm font-medium text-gray-900"
+
+                        {/* Dashboard */}
+                        <NavLink
+                            to="/dashboard"
+                            onClick={() => setIsOpen(false)}
+                            className={({ isActive }) =>
+                                `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+                                    isActive
+                                        ? "bg-gray-900 text-white"
+                                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                                }`
+                            }
                         >
                             <LayoutDashboard size={19} />
                             Dashboard
-                        </a>
+                        </NavLink>
 
-                        <a
-                            href="/employees"
-                            className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                        {/* Employees */}
+                        <NavLink
+                            to="/employees"
+                            onClick={() => setIsOpen(false)}
+                            className={({ isActive }) =>
+                                `flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition ${
+                                    isActive
+                                        ? "bg-gray-900 text-white"
+                                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                                }`
+                            }
                         >
                             <Users size={19} />
                             Employees
-                        </a>
+                        </NavLink>
+
                     </div>
                 </nav>
+
+                {/* Dummy profile */}
+                <div className="border-t border-gray-200 p-4">
+                    <div className="flex items-center gap-3 rounded-lg p-2 hover:bg-gray-50">
+
+                        {/* Profile icon */}
+                        <UserCircle
+                            size={40}
+                            className="text-gray-400"
+                        />
+
+                        {/* Profile information */}
+                        <div className="min-w-0">
+                            <p className="truncate text-sm font-semibold text-gray-900">
+                                Rahul Sharma
+                            </p>
+
+                            <p className="truncate text-xs text-gray-500">
+                                HR Administrator
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
             </aside>
         </>
     );
