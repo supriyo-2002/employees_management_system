@@ -2,16 +2,22 @@
 const express = require("express");
 
 // Import routes
-const exampleRoutes = require("./routes/exampleRoutes");
+const employeeRoutes = require("./routes/employeeRoutes");
+
+// Import CORS
+const cors = require("cors");
 
 // Create Express app
 const app = express();
+
+// Enable CORS
+app.use(cors());
 
 // JSON middleware
 app.use(express.json());
 
 // Routes
-app.use("/api/example", exampleRoutes);
+app.use("/api/employees", employeeRoutes);
 
 // Server port
 const PORT = 5000;
