@@ -1,7 +1,7 @@
 // Import Supabase client
 const supabase = require("../config/supabase");
 
-// Get all employees
+
 // Get all employees
 const getEmployees = async (req, res) => {
     try {
